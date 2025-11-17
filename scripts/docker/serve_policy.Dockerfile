@@ -39,7 +39,6 @@ COPY src/openpi/models_pytorch/transformers_replace/ /tmp/transformers_replace/
 RUN /.venv/bin/python -c "import transformers; print(transformers.__file__)" | xargs dirname | xargs -I{} cp -r /tmp/transformers_replace/* {} && rm -rf /tmp/transformers_replace
 
 # Set JAX environment variables for GPU compatibility
-ENV JAX_PLATFORMS=gpu
-ENV XLA_FLAGS=--xla_gpu_strict_conv_algorithmic=false
+ENV JAX_PLATFORMS=cuda
 
 CMD /bin/bash -c "uv run scripts/serve_policy.py $SERVER_ARGS"

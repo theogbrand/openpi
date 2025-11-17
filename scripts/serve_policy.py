@@ -48,7 +48,7 @@ class Args:
 
     # Port to serve the policy on.
     port: int = 8000
-    # Record the policy's behavior for debugging.
+    # Record the policy's behavior for debugging.>
     record: bool = False
 
     # Specifies how to load the policy. If not provided, the default policy for the environment will be used.
@@ -70,8 +70,8 @@ DEFAULT_CHECKPOINT: dict[EnvMode, Checkpoint] = {
         dir="gs://openpi-assets/checkpoints/pi05_droid",
     ),
     EnvMode.LIBERO: Checkpoint(
-        config="pi05_base",
-        dir="gs://openpi-assets/checkpoints/pi05_base",
+        config="pi05_libero",
+        dir="gs://openpi-assets/checkpoints/pi05_libero",
     ),
 }
 
