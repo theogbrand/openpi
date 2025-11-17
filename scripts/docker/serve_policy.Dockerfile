@@ -15,6 +15,9 @@ WORKDIR /app
 # Needed because LeRobot uses git-lfs.
 RUN apt-get update && apt-get install -y git git-lfs linux-headers-generic build-essential clang
 
+# Configure git-lfs to skip downloading large files during git operations
+RUN git lfs install --skip-smudge
+
 # Copy from the cache instead of linking since it's a mounted volume
 ENV UV_LINK_MODE=copy
 
@@ -34,5 +37,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # Copy transformers_replace files while preserving directory structure
 COPY src/openpi/models_pytorch/transformers_replace/ /tmp/transformers_replace/
 RUN /.venv/bin/python -c "import transformers; print(transformers.__file__)" | xargs dirname | xargs -I{} cp -r /tmp/transformers_replace/* {} && rm -rf /tmp/transformers_replace
+
+# Set JAX environment variables for GPU compatibility
+ENV JAX_PLATFORMS=gpu
+ENV XLA_FLAGS=--xla_gpu_strict_conv_algorithmic=false
 
 CMD /bin/bash -c "uv run scripts/serve_policy.py $SERVER_ARGS"
