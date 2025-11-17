@@ -13,14 +13,14 @@ git submodule update --init --recursive
 ## With Docker (recommended)
 
 ```bash
-# Grant access to the X11 server:
-sudo xhost +local:docker
-
-# To run with the default checkpoint and task suite:
+# Run with default settings (uses Xvfb for headless rendering):
 SERVER_ARGS="--env LIBERO" docker compose -f examples/libero/compose.yml up --build
 
-# To run with glx for Mujoco instead (use this if you have egl errors):
-MUJOCO_GL=glx SERVER_ARGS="--env LIBERO" docker compose -f examples/libero/compose.yml up --build
+# If you get rendering errors, try with EGL instead:
+MUJOCO_GL=egl SERVER_ARGS="--env LIBERO" docker compose -f examples/libero/compose.yml up --build
+
+# Or with OSMesa (software rendering, slower but most compatible):
+MUJOCO_GL=osmesa SERVER_ARGS="--env LIBERO" docker compose -f examples/libero/compose.yml up --build
 ```
 
 You can customize the loaded checkpoint by providing additional `SERVER_ARGS` (see `scripts/serve_policy.py`), and the LIBERO task suite by providing additional `CLIENT_ARGS` (see `examples/libero/main.py`).
