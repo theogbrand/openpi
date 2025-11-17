@@ -1,5 +1,8 @@
 # Run with:
+# export OPENPI_DATA_HOME=~/.cache/openpi
 # docker compose -f examples/aloha_sim/compose.yml up --build
+#
+# Note: OPENPI_DATA_HOME should be an absolute path (e.g., /home/user/.cache/openpi)
 services:
   runtime:
     image: aloha_sim
@@ -26,7 +29,7 @@ services:
     network_mode: host
     volumes:
       - $PWD:/app
-      - ${OPENPI_DATA_HOME:-~/.cache/openpi}:/openpi_assets
+      - ${OPENPI_DATA_HOME:-$HOME/.cache/openpi}:/openpi_assets
     environment:
       - SERVER_ARGS
       - OPENPI_DATA_HOME=/openpi_assets

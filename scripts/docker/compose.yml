@@ -1,5 +1,11 @@
 # Run with:
+# export OPENPI_DATA_HOME=~/.cache/openpi
 # docker compose -f scripts/docker/compose.yml up --build
+#
+# Or set the variable inline:
+# OPENPI_DATA_HOME=~/.cache/openpi docker compose -f scripts/docker/compose.yml up --build
+#
+# Note: OPENPI_DATA_HOME should be an absolute path (e.g., /home/user/.cache/openpi)
 services:
   openpi_server:
     image: openpi_server
@@ -13,7 +19,7 @@ services:
     # Populate aws credential inside the container.
     volumes:
       - $PWD:/app
-      - ${OPENPI_DATA_HOME:-~/.cache/openpi}:/openpi_assets
+      - ${OPENPI_DATA_HOME:-$HOME/.cache/openpi}:/openpi_assets
     environment:
       - SERVER_ARGS
       - OPENPI_DATA_HOME=/openpi_assets
