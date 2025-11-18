@@ -40,6 +40,8 @@ services:
     volumes:
       - $PWD:/app
       - ${OPENPI_DATA_HOME:-$HOME/.cache/openpi}:/openpi_assets
+      # Mount griffin directory if it exists (for local PyTorch weights)
+      - ${PWD}/griffin:/app/griffin
     environment:
       - SERVER_ARGS
       - OPENPI_DATA_HOME=/openpi_assets
