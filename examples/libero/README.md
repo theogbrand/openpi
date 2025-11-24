@@ -10,12 +10,39 @@ This example requires git submodules to be initialized. Don't forget to run:
 git submodule update --init --recursive
 ```
 
+# Directory Structure
+
+```
+models_to_evaluate/
+└── pi05_libero_pytorch_base/
+    ├── model.safetensors
+    └── assets/
+        └── arx/
+            └── norm_stats.json
+```
+
+## Expected Structure
+
+Ensure models follow this structure
+
+- **`models_to_evaluate/`** - Top-level directory containing models for evaluation
+  - **`pi05_libero_pytorch_base/`** - Model directory
+    - `model.safetensors` - Model weights in safetensors format
+    - **`assets/`** - Assets directory containing model files
+      - **`arx/`** - Model-specific subdirectory
+        - `norm_stats.json` - Normalization statistics for the model (super important to reproduce results and optimize performance; based on data trained on; if reproducing results, copy corresponding norm_stats.json from the checkpoint dir provided)
+
 ## With Docker (recommended)
 
 ```bash
-# Run with default settings (uses Xvfb for headless rendering):
+# Run with default settings (uses Xvfb for headless rendering): -> Griffin Labs Engineers: run git command above, ensure model is in correct directory structure above and then this should work, run in root dir with docker
+# edit serve_policy.py to use pi05_libero_finetuned or other checkpoints; put checkpoints in models_to_evaluate/{HF_model_ID}/model.safetensors -> only file required
+# Ensure Training Config in src/openpi/training/config.py matches the checkpoint you are using
+# Ignore the private macro file robosuite warning, ignore LibGL file not found error
 SERVER_ARGS="--env LIBERO" docker compose -f examples/libero/compose.yml up --build
 
+
+# IMPORTANT: only try these as last resort, if the above doesn't work
 # If you get rendering errors, try with EGL instead:
 MUJOCO_GL=egl SERVER_ARGS="--env LIBERO" docker compose -f examples/libero/compose.yml up --build
 

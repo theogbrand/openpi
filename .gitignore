@@ -170,3 +170,4 @@ griffin/*
 hf_pi05_base/*
 hf_pi05_libero_finetuned/*
 hf_pi0_libero_finetuned/*
+models_to_evaluate/pi05_libero_pytorch_base/*
