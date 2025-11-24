@@ -738,6 +738,10 @@ _CONFIGS = [
             repo_id="physical-intelligence/libero",
             base_config=DataConfig(prompt_from_task=True),
             extra_delta_transform=False,
+            assets=AssetsConfig(
+                assets_dir="gs://openpi-assets/checkpoints/pi05_base/assets",
+                asset_id="arx",
+            )
         ),
         batch_size=256,
         lr_schedule=_optimizer.CosineDecaySchedule(

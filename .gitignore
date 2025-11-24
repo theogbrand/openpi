@@ -168,3 +168,5 @@ cython_debug/
 #.idea/
 griffin/*
 hf_pi05_base/*
+hf_pi05_libero_finetuned/*
+hf_pi0_libero_finetuned/*

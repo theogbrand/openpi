@@ -71,7 +71,9 @@ DEFAULT_CHECKPOINT: dict[EnvMode, Checkpoint] = {
     ),
     EnvMode.LIBERO: Checkpoint(
         config="pi05_libero",
-        dir="gs://openpi-assets/checkpoints/pi05_libero",
+        # dir="griffin/pi05_base_pytorch", # original no finetune, this should run but get 0% score
+        dir="griffin/pi05_libero_pytorch_base", # ensure compute_norm_stats.json is present in the checkpoint directory in the assets/arx dir
+        # dir="hf_pi0_libero_finetuned",
     ),
 }
 
