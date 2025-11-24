@@ -739,7 +739,7 @@ _CONFIGS = [
             base_config=DataConfig(prompt_from_task=True),
             extra_delta_transform=False,
             assets=AssetsConfig(
-                assets_dir="gs://openpi-assets/checkpoints/pi05_base/assets",
+                assets_dir="gs://openpi-assets/checkpoints/pi05_libero/assets", # make sure this matches pi05_libero or pi05_base because norm_stats.json will differ based on the model, otherwise 0% score will be returned
                 asset_id="arx",
             )
         ),
