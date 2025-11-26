@@ -12,6 +12,28 @@ git submodule update --init --recursive
 
 # Directions to evaluate a new model checkpoint
 
+# Expected directory structure for new model checkpoints
+
+```
+models_to_evaluate/
+└── pi05_libero_pytorch_base/
+    ├── model.safetensors
+    └── assets/
+        └── arx/
+            └── norm_stats.json
+```
+
+## Expected Structure
+
+Ensure models follow this structure
+
+- **`models_to_evaluate/`** - Top-level directory containing models for evaluation
+  - **`pi05_libero_pytorch_base/`** - Model directory
+    - `model.safetensors` - Model weights in safetensors format
+    - **`assets/`** - Assets directory containing model files
+      - **`arx/`** - Model-specific subdirectory
+        - `norm_stats.json` - Normalization statistics for the model (super important to reproduce results and optimize performance; based on data trained on; if reproducing results, copy corresponding norm_stats.json from the checkpoint dir provided)
+
 1. Put the model checkpoint in the `models_to_evaluate/` directory
 2. Put the norm_stats.json file in the `assets/arx/` directory
   - norm_stats.json file should be based on the data used to train the model. For all LIBERO models, just use copy from the other dirs e.g `cp models_to_evaluate/pi05_libero_pytorch_base/assets/arx/norm_stats.json models_to_evaluate/pi05_depth_anything_libero_pytorch_base/assets/arx`
@@ -33,27 +55,7 @@ uvx hf download griffinlabs/pi05_depth_anything_libero_pytorch_base model.safete
 SERVER_ARGS="--env LIBERO" docker compose -f examples/libero/compose.yml up --build
 ```
 
-# Directory Structure
-
-```
-models_to_evaluate/
-└── pi05_libero_pytorch_base/
-    ├── model.safetensors
-    └── assets/
-        └── arx/
-            └── norm_stats.json
-```
-
-## Expected Structure
-
-Ensure models follow this structure
-
-- **`models_to_evaluate/`** - Top-level directory containing models for evaluation
-  - **`pi05_libero_pytorch_base/`** - Model directory
-    - `model.safetensors` - Model weights in safetensors format
-    - **`assets/`** - Assets directory containing model files
-      - **`arx/`** - Model-specific subdirectory
-        - `norm_stats.json` - Normalization statistics for the model (super important to reproduce results and optimize performance; based on data trained on; if reproducing results, copy corresponding norm_stats.json from the checkpoint dir provided)
+# Old Instructions for running the evaluation script (for reference)
 
 ## With Docker (recommended)
 
