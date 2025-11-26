@@ -10,6 +10,29 @@ This example requires git submodules to be initialized. Don't forget to run:
 git submodule update --init --recursive
 ```
 
+# Directions to evaluate a new model checkpoint
+
+1. Put the model checkpoint in the `models_to_evaluate/` directory
+2. Put the norm_stats.json file in the `assets/arx/` directory
+  - norm_stats.json file should be based on the data used to train the model. For all LIBERO models, just use copy from the other dirs e.g `cp models_to_evaluate/pi05_libero_pytorch_base/assets/arx/norm_stats.json models_to_evaluate/pi05_depth_anything_libero_pytorch_base/assets/arx`
+3. Edit the `scripts/serve_policy.py` file to use the new model checkpoint
+  # Edit the `DEFAULT_CHECKPOINT` dictionary with the new model checkpoint:
+  ```python
+  DEFAULT_CHECKPOINT: dict[EnvMode, Checkpoint] = {
+    EnvMode.LIBERO: Checkpoint(
+        config="pi05_libero",
+        dir="models_to_evaluate/pi05_depth_anything_libero_pytorch_base",
+    ),
+  }
+  ```
+4. Run the evaluation script:
+
+```bash
+# Download the model checkpoint
+uvx hf download griffinlabs/pi05_depth_anything_libero_pytorch_base model.safetensors --local-dir models_to_evaluate/pi05_depth_anything_libero_pytorch_base
+SERVER_ARGS="--env LIBERO" docker compose -f examples/libero/compose.yml up --build
+```
+
 # Directory Structure
 
 ```
