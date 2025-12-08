@@ -117,7 +117,10 @@ We provide detailed step-by-step examples for running inference of our pre-train
 
 **Test inference without a robot**: We provide a [script](examples/simple_client/README.md) for testing inference without a robot. This script will generate a random observation and run inference with the model. See [here](examples/simple_client/README.md) for more details.
 
-Guide: https://blog.csdn.net/nenchoumi3119/article/details/154258492#:~:text=%E8%BF%99%E7%AF%87%E5%8D%9A%E5%AE%A2%E7%94%A8%E6%9D%A5,cuDNN%20:%209.3.0.75%EF%BC%9B
+Orin Setup Guide: https://blog.csdn.net/nenchoumi3119/article/details/154258492#:~:text=%E8%BF%99%E7%AF%87%E5%8D%9A%E5%AE%A2%E7%94%A8%E6%9D%A5,cuDNN%20:%209.3.0.75%EF%BC%9B
+
+vLLM Guide: https://forums.developer.nvidia.com/t/run-vllm-in-thor-from-vllm-repository/348804
+
 
 ## Fine-Tuning Base Models on Your Own Data
 
